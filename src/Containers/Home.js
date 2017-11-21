@@ -31,8 +31,9 @@ class Home extends Component {
                     <Header loggedIn={true}/>
                     <div className="text-center">
                         <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
+                        <EventDisplay events={this.props.events} uid={this.props.uid} userData={this.props.userData}/>
                     </div>
-                    <EventDisplay/>
+                    
                 </div>
             );
     	}
@@ -48,7 +49,10 @@ class Home extends Component {
 }
 function mapStateToProps(state) {
   const checkedUser = state.user || {};
-  return { uid: checkedUser.uid, userData: state.dbUsers };
+  return { 
+    uid: checkedUser.uid,
+    userData: state.dbUsers,
+    events: state.events };
 }
 export default connect(mapStateToProps, {logout, getUser})(Home);
 

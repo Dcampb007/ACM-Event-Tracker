@@ -9,7 +9,7 @@ export class Card extends React.Component {
 
     render() {
         const divClass = {
-            'padding-top': '4%',
+            'paddingTop': '4%',
         }
         
         var items = ['#e83e8c', '#20c997', '#868e96', '#FF7518', '#2780E3'];
@@ -18,12 +18,12 @@ export class Card extends React.Component {
         console.log(item);
 
         const cardBackground = {
-            'background-color': item,
-            'border-color': item,
+            'backgroundColor': item,
+            'borderColor': item,
         }
 
         const body_text_style = {
-            'font-size': '1.2em',
+            'fontSize': '1.2em',
         }
 
         function buildAlignCSS(val) {

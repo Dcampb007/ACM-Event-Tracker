@@ -19,12 +19,19 @@ class AddEvent extends Component {
   onSubmit(data) {
     console.log(data);
     console.log(this.props.userData[this.props.uid]);
-    // this.props.addEvent(uid, data).catch((err) => {
-    //     this.setState({
-    //       error: err
-    //     });
-    //   }
-    // );
+    console.log(typeof(this.props.events));
+    let index = Object.keys(this.props.events).length;
+    let events = this.props.events;
+    events[index] = data;
+    console.log(events);
+    this.props.addEvent(this.props.uid, events).catch((err) => {
+        this.setState({
+          error: err
+        });
+      }
+    );
+    this.props.history.push('/Events');
+
   }
 
 
@@ -84,13 +91,14 @@ function mapStateToProps(state, ownProps) {
   const checkedUser = state.user || {};
   return {
     uid: checkedUser.uid,
-    userData: state.dbUsers};
+    userData: state.dbUsers,
+    events: state.events};
 }
 
 let form = reduxForm({
   form: 'AddEventForm'
 })(AddEvent);
 
-form = connect(mapStateToProps, {})(form);
+form = connect(mapStateToProps, {addEvent})(form);
 
 export default form;

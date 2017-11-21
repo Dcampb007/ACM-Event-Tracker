@@ -2,23 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import SimpleBox from '../Components/SimpleBox';
+import EventDisplay from '../Components/EventDisplay';
 import Header from './Header';
 import {Link} from 'react-router-dom';
 import '../Styles/App.css';
 class Events extends Component {
-  renderEvents() {
-    const { events, uid } = this.props;
-    console.log(events);
-    return _.map((index, details) => {
-      return (
-        <SimpleBox title="Event's Name Name">
-          <div className="card-body text-center">
-            {index} {details['Title']}
-          </div>
-        </SimpleBox>
-      );
-    });
-  }
+
   renderAdmin() {
     return (
       <div className="text-center">
@@ -26,27 +15,22 @@ class Events extends Component {
         <Link to="/AddEvent">
           <button  type="button" className="btn btn-primary">Add Event</button> 
         </Link>
-        {this.renderEvents()}
+        <EventDisplay events={this.props.events} uid={this.props.uid} userData={this.props.userData}/>
       </div>
       )
   }
 
   renderUser() {
     return (
-      <h1>For User </h1>
+      <div>
+        <h1>For User </h1>
+        <EventDisplay events={this.props.events} uid={this.props.uid}/>
+      </div>
       )
   }
-  /*
-          <div className="text-center">
-          <h1>Events</h1></div>}
-        {this.renderUsers()}
-      </div>
-      */
 
   render() {
     const { uid, userData } = this.props;
-    console.log(uid);
-    console.log(userData);
     return (
       <div>
         <Header loggedIn={true} />

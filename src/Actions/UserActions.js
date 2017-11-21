@@ -63,10 +63,10 @@ export function getEvents() {
     });
   };
 }
-/* this doesn't work */
-export function addEvent(data, uid) {
-  return dispatch => database.ref('users').child(uid).update(
-  {data});
+
+export function addEvent(uid, events) {
+  return dispatch => database.ref('/').update(
+  {events});
 }
 
 export function login(email, password) {
