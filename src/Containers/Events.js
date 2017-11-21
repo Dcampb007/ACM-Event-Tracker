@@ -5,10 +5,11 @@ import SimpleBox from '../Components/SimpleBox';
 import Header from './Header';
 import {Link} from 'react-router-dom';
 import '../Styles/App.css';
+import EventDisplay from '../Components/EventDisplay';
+
 class Events extends Component {
   renderEvents() {
     const { events, uid } = this.props;
-    console.log(events);
     return _.map((index, details) => {
       return (
         <SimpleBox title="Event's Name Name">
@@ -45,8 +46,6 @@ class Events extends Component {
 
   render() {
     const { uid, userData } = this.props;
-    console.log(uid);
-    console.log(userData);
     return (
       <div>
         <Header loggedIn={true} />
@@ -54,6 +53,7 @@ class Events extends Component {
           ? this.renderAdmin()
           : this.renderUser()
         }
+	<EventDisplay/>
       </div>
     );
   }

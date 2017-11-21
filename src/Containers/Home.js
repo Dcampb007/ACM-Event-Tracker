@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Containers/Header';
 import _ from 'lodash';
 import SimpleBox from '../Components/SimpleBox';
-import EventDisplay from '../Components/EventDisplay';
+
 import { connect } from 'react-redux';
 import { logout, getUser } from '../Actions/UserActions';
 
@@ -32,7 +32,6 @@ class Home extends Component {
                     <div className="text-center">
                         <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
                     </div>
-                    <EventDisplay/>
                 </div>
             );
     	}

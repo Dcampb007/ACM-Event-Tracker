@@ -6,7 +6,6 @@ class EventDisplay extends React.Component {
 	constructor () {
 		super();
 		this.state = {
-			eventName: "No event Selected.",
 			eventList: [],
 			user_id: auth.currentUser.uid
 		};
@@ -25,14 +24,14 @@ class EventDisplay extends React.Component {
 	}
 	render () {
 		const mainContainer = {
-			'padding-bottom': '4%',
-		}
+			'paddingBottom': '4%',
+		};
 
 		return (
 			<div className="container" style={mainContainer}>
 				{
 					this.state.eventList.map((listedEvent) => {
-						return<Card event={listedEvent}/>
+						return<Card key={listedEvent.id} event={listedEvent}/>
 
 						/* return<li>
 							<h2>{listedEvent.title}</h2>
@@ -49,9 +48,10 @@ class EventDisplay extends React.Component {
 	}
 
 	componentWillMount() {
-		const events = database.ref().child('events');
+		const events = database.ref().child('events/events/events');
 		events.on('value', ((snapshot) => {
 			snapshot.forEach( (event) => {
+				console.log(event.child('Title').val());
 				let ev = {
 					title: event.child('Title').val(), 
 					date: event.child('Date').val(),
@@ -59,7 +59,7 @@ class EventDisplay extends React.Component {
 					description: event.child('Description').val(),
 					id: event.key
 				};
-				this.setState({eventList: [ev].concat(this.state.eventList)});
+				this.setState({eventList: this.state.eventList.concat([ev])});
 				})			
 			})
 		);
