@@ -2,28 +2,39 @@ import React, { Component } from 'react';
 import Header from '../Containers/Header';
 import _ from 'lodash';
 import SimpleBox from '../Components/SimpleBox';
-import EventDisplay from '../Components/EventDisplay';
 import { connect } from 'react-redux';
 import { logout, getUser } from '../Actions/UserActions';
+import {Card} from '../Components/EventCard';
 
 class Home extends Component {
-
     renderEvents() {
-        const { userData, uid } = this.props;
-        return _.map(_.filter(userData, (user, key) => {
-          return key !== uid;
-        }), (user, key) => {
-          return (
-            <SimpleBox key={key} title="User's Name">
-              <div className="card-body text-center">
-                {user.fname} {user.lname}
-              </div>
-            </SimpleBox>
-          );
-        });
-      }
+        let events = this.props.events;
+        let eventKeys = this.props.userData[this.props.uid]['events'];
+        let eventList = [];
+        for(var eventKey in eventKeys) {
+            if (eventKey in events) {
+                let ev = {
+                    title: events[eventKey]['Title'], 
+                    date: events[eventKey]['Date'],
+                    location: events[eventKey]['Location'],
+                    description: events[eventKey]['Description'],
+                    id: eventKey,
+                };
+                eventList.push(ev);
+            }
+        }
+        const mainContainer = {'paddingBottom': '4%'};
+        return (
+            <div className="container" style={mainContainer}>
+                {
+                    eventList.map((listedEvent) => {
+                        return <Card key={listedEvent.id} event={listedEvent}/>
+                    })
+                } 
+            </div>
+        );
+    }
     render() {
-
         const { uid, userData } = this.props;
     	if (uid) {
     		return (
@@ -31,7 +42,8 @@ class Home extends Component {
                     <Header loggedIn={true}/>
                     <div className="text-center">
                         <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
-                        <EventDisplay events={this.props.events} uid={this.props.uid} userData={this.props.userData}/>
+                        <h2>My Events</h2>
+                        {this.renderEvents()}
                     </div>
                     
                 </div>

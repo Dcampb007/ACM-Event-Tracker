@@ -2,12 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import SimpleBox from '../Components/SimpleBox';
-import EventDisplay from '../Components/EventDisplay';
 import Header from './Header';
 import {Link} from 'react-router-dom';
+import {Card} from '../Components/EventCard';
 import '../Styles/App.css';
+
 class Events extends Component {
 
+renderEvents() {
+  let events = this.props.events;
+  let eventList = [];
+  Object.keys(events).forEach(function(key,index) {
+    let ev = {
+      title: events[key]['Title'], 
+      date: events[key]['Date'],
+      location: events[key]['Location'],
+      description: events[key]['Description'],
+      id: index,
+    };
+    eventList.push(ev);
+  }); 
+  const mainContainer = {'paddingBottom': '4%'};
+  return (
+      <div className="container" style={mainContainer}>
+          {
+              eventList.map((listedEvent) => {
+                  return <Card key={listedEvent.id} event={listedEvent}/>
+              })
+          } 
+      </div>);
+  }
   renderAdmin() {
     return (
       <div className="text-center">
@@ -15,20 +39,16 @@ class Events extends Component {
         <Link to="/AddEvent">
           <button  type="button" className="btn btn-primary">Add Event</button> 
         </Link>
-        <EventDisplay events={this.props.events} uid={this.props.uid} userData={this.props.userData}/>
       </div>
       )
   }
-
   renderUser() {
     return (
       <div>
         <h1>For User </h1>
-        <EventDisplay events={this.props.events} uid={this.props.uid}/>
       </div>
       )
   }
-
   render() {
     const { uid, userData } = this.props;
     return (
@@ -38,11 +58,11 @@ class Events extends Component {
           ? this.renderAdmin()
           : this.renderUser()
         }
+        {this.renderEvents()}
       </div>
     );
   }
 }
-
 function mapStateToProps(state) {
   const checkedUser = state.user || {};
   return { 

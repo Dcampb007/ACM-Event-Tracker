@@ -1,12 +1,6 @@
 import React from 'react';
 
 export class Card extends React.Component {
-    constructor(state) {
-        super(state);
-    }
-
-    
-
     render() {
         const divClass = {
             'paddingTop': '4%',
@@ -15,8 +9,6 @@ export class Card extends React.Component {
         var items = ['#e83e8c', '#20c997', '#868e96', '#FF7518', '#2780E3'];
 
         var item = items[Math.floor(Math.random()*items.length)];
-        console.log(item);
-
         const cardBackground = {
             'backgroundColor': item,
             'borderColor': item,
@@ -32,9 +24,6 @@ export class Card extends React.Component {
             }
             return align;
         }
-
-
-
         return (
             <div className="row" style={divClass}>
     

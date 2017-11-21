@@ -5,7 +5,6 @@ import {Link, withRouter} from 'react-router-dom';
 import '../Styles/App.css';
 
 class Header extends Component {
-
   renderLinks() {
     if (this.props.loggedIn)
       return (

@@ -21,7 +21,7 @@ class LoadingComponent extends Component {
 
   render() {
     const { userLoading, dbUserLoading, dbEventsLoading, children } = this.props;
-    if (userLoading === false && dbUserLoading === false && dbEventsLoading == false) {
+    if (userLoading === false && dbUserLoading === false && dbEventsLoading === false) {
       return (
         <div>
           {children}
