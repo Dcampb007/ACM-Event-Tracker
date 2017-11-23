@@ -28,7 +28,10 @@ class Home extends Component {
             <div className="container" style={mainContainer}>
                 {
                     eventList.map((listedEvent) => {
-                        return <Card key={listedEvent.id} event={listedEvent}/>
+                        return <Card key={listedEvent.id}
+                                     event={listedEvent}
+                                     allUsers={this.props.userData}
+                                     userID={this.props.uid}  />
                     })
                 } 
             </div>
