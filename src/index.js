@@ -13,26 +13,28 @@ import AuthenticatedComponent from './Containers/AuthenticatedComponent';
 import ListUsers from './Containers/ListUsers';
 import Home from './Containers/Home';
 import UsersRegistrationView from './Containers/UsersRegistration';
+import TakeSurvey from './Actions/TakeSurvey';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <BrowserRouter>
-      <LoadingComponent>
-        <Switch>
-          <Route path="/CreateAccount" component={CreateAccount}/>
-          <Route path="/Login" component={Login}/>
-          <Route exact path="/" component={Home}/>
-          <AuthenticatedComponent>
-            <Route path="/Events" component={Events}/>
-            <Route path="/AddEvent" component={AddEvent}/>
-            <Route path="/UsersRegistration" component={UsersRegistrationView}/>
-          </AuthenticatedComponent>
-        </Switch>
-      </LoadingComponent>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root'));
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <BrowserRouter>
+            <LoadingComponent>
+                <Switch>
+                    <Route path="/CreateAccount" component={CreateAccount}/>
+                    <Route path="/Login" component={Login}/>
+                    <Route exact path="/" component={Home}/>
+                    <AuthenticatedComponent>
+                        <Route path="/Events" component={Events}/>
+                        <Route path="/AddEvent" component={AddEvent}/>
+                        <Route path="/UsersRegistration" component={UsersRegistrationView}/>
+                        <Route path="/TakeSurvey" component={TakeSurvey}/>
+                    </AuthenticatedComponent>
+                </Switch>
+            </LoadingComponent>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root'));
 registerServiceWorker();

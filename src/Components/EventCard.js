@@ -1,5 +1,6 @@
 import React from 'react';
 import { database } from '../Firebase';
+import {Link} from 'react-router-dom';
 
 export class Card extends React.Component {
     constructor () {
@@ -16,10 +17,8 @@ export class Card extends React.Component {
            if (snapshot.val()) {
                let updated_events = snapshot.val();
                updated_events[ev_id] = ev_id;
-               console.log(ev_id);
                database.ref("users/" + this.props.userID + "/events").set(updated_events);
            } else {
-               console.log(ev_id);
                let updated_events = {};
                updated_events[ev_id] = ev_id;
                database.ref("users/"+this.props.userID+"/events/"+ev_id).set(updated_events);
@@ -63,6 +62,12 @@ export class Card extends React.Component {
             }
             return align;
         }
+
+        function alignRight() {
+            return ({
+                'float': 'right'
+            });
+        }
         return (
             <div className="row" style={divClass}>
     
@@ -77,14 +82,17 @@ export class Card extends React.Component {
                             <a style={buildAlignCSS('right')}> {this.props.event.date}</a>
                         </p>
                         <br />
-                        <button disabled={(this.isRegistered())}
+                        <button className="btn btn-primary" disabled={(this.isRegistered())}
                                 onClick={this.registerForEvent.bind(this)}>
                             Register
                         </button>
-                        <button disabled={!(this.isRegistered())}
+                        <button className="btn btn-primary" disabled={!(this.isRegistered())}
                                 onClick={this.unregisterForEvent.bind(this)}>
                             Un-register
                         </button>
+                        <Link to={{ pathname: '/TakeSurvey', search:'?eventID='+this.props.event.id }}>
+                            <button  style={alignRight()}type="button" className="btn btn-primary">Take survey for this event</button>
+                        </Link>
                         <p className="card-text"> {this.props.event.description}</p>
                     </div>
                 </div>
