@@ -82,7 +82,5 @@ export class Card extends React.Component {
                 </div>
             </div>
         );
-        
-
     }
 }
