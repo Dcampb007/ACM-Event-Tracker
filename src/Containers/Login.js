@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SimpleBox from '../Components/SimpleBox';
-import InputField from '../Components/InputField';
+import {InputField} from '../Components/InputField';
 import FooterFormButton from '../Components/FooterFormButton';
 import { login, getUser } from '../Actions/UserActions';
 import { connect } from 'react-redux';

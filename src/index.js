@@ -16,6 +16,7 @@ import UsersRegistrationView from './Containers/UsersRegistration';
 import TakeSurvey from './Actions/TakeSurvey';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
+import SurveyForm from './Containers/Survey';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(

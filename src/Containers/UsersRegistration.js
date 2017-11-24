@@ -38,7 +38,7 @@ class UsersRegistrationView extends Component {
         eventIDs.forEach((id) => {
            if (this.state.attendeeMap[id].length > 0) {
                //console.log(this.props.events[id].Title+" has "+this.state.attendeeMap[id].length+" registered members");
-               listItems.push(<ul className="card-body body-text" key={"event"+id}>{this.props.events[id].Title}
+               listItems.push(<ul key={"event"+id}>{this.props.events[id].Title}
                    {
                        this.state.attendeeMap[id].map((attendee) =>
                        {

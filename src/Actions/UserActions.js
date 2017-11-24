@@ -64,13 +64,19 @@ export function getEvents() {
   };
 }
 
-export function addEvent(uid, events) {
+export function addEvent(events) {
   return dispatch => database.ref('/').update(
   {events});
 }
 
+<<<<<<< HEAD
 export function registerForEvent(uid, events) {
     return dispatch => database.ref("users/"+auth.currentUser.id+"/events").update({events});
+=======
+export function updateUserEvents(uid, events) {
+
+    return dispatch => database.ref("users/"+uid+"/").update({events});
+>>>>>>> a4ad0043f2dfcb33a96ac6cc175c734b63dc3964
 }
 
 export function login(email, password) {
