@@ -1,6 +1,45 @@
 import React from 'react';
+import { database } from '../Firebase';
 
 export class Card extends React.Component {
+    constructor () {
+        super();
+        this.state = {
+            users_events:{}
+        }
+    }
+
+    registerForEvent() {
+        let ev_id = this.props.event.id;
+        let users_events = {};
+        let events = database.ref("users/"+this.props.userID+"/events").once('value').then((snapshot) => {
+           if (snapshot.val()) {
+               let updated_events = snapshot.val();
+               updated_events[ev_id] = ev_id;
+               console.log(ev_id);
+               database.ref("users/" + this.props.userID + "/events").set(updated_events);
+           } else {
+               console.log(ev_id);
+               let updated_events = {};
+               updated_events[ev_id] = ev_id;
+               database.ref("users/"+this.props.userID+"/events/"+ev_id).set(updated_events);
+           }
+        });
+    }
+
+    isRegistered() {
+        let users_events = this.props.allUsers[this.props.userID].events;
+        if(users_events) {
+            return (this.props.event.id in this.props.allUsers[this.props.userID].events);
+        }
+        return false;
+    }
+    unregisterForEvent() {
+        let ev_id = this.props.event.id;
+        let events = database.ref("users/"+this.props.userID+"/events").once('value').then((snapshot) => {
+            database.ref("users/"+this.props.userID+"/events/"+ev_id).remove();
+        });
+    }
     render() {
         const divClass = {
             'paddingTop': '4%',
@@ -34,17 +73,22 @@ export class Card extends React.Component {
                     </div>
                     <div className="card-body body-text" style={body_text_style}>
                         <p className='card-text'> 
-                            <a style={buildAlignCSS('left')}> {this.props.event.location}  </a>
+                            <a style={buildAlignCSS('left')}> {this.props.event.location} </a>
                             <a style={buildAlignCSS('right')}> {this.props.event.date}</a>
                         </p>
                         <br />
-                        
+                        <button disabled={(this.isRegistered())}
+                                onClick={this.registerForEvent.bind(this)}>
+                            Register
+                        </button>
+                        <button disabled={!(this.isRegistered())}
+                                onClick={this.unregisterForEvent.bind(this)}>
+                            Un-register
+                        </button>
                         <p className="card-text"> {this.props.event.description}</p>
                     </div>
                 </div>
             </div>
         );
-        
-
     }
 }

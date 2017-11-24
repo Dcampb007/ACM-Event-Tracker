@@ -69,6 +69,10 @@ export function addEvent(uid, events) {
   {events});
 }
 
+export function registerForEvent(uid, events) {
+    return dispatch => database.ref("users/"+auth.currentUser.id+"/events").update({events});
+}
+
 export function login(email, password) {
   return dispatch => auth.signInWithEmailAndPassword(email, password);
 }
