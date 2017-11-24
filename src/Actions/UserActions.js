@@ -64,9 +64,14 @@ export function getEvents() {
   };
 }
 
-export function addEvent(uid, events) {
+export function addEvent(events) {
   return dispatch => database.ref('/').update(
   {events});
+}
+
+export function updateUserEvents(uid, events) {
+
+    return dispatch => database.ref("users/"+uid+"/").update({events});
 }
 
 export function login(email, password) {

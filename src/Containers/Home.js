@@ -4,7 +4,7 @@ import _ from 'lodash';
 import SimpleBox from '../Components/SimpleBox';
 import { connect } from 'react-redux';
 import { logout, getUser } from '../Actions/UserActions';
-import {Card} from '../Components/EventCard';
+import Card from './EventCard';
 
 class Home extends Component {
     renderEvents() {
@@ -12,33 +12,36 @@ class Home extends Component {
         let eventKeys = this.props.userData[this.props.uid]['events'];
         let eventList = [];
         for(var eventKey in eventKeys) {
-            if (eventKey in events) {
-                let ev = {
-                    title: events[eventKey]['Title'], 
-                    date: events[eventKey]['Date'],
-                    stime: events[eventKey]['Stime'],
-                    etime: events[eventKey]['Etime'],
-                    location: events[eventKey]['Location'],
-                    description: events[eventKey]['Description'],
-                    id: eventKey,
-                };
-                eventList.push(ev);
-            }
+          if (eventKey in events) {
+            let ev = {
+              title: events[eventKey]['Title'], 
+              date: events[eventKey]['Date'],
+              stime: events[eventKey]['Stime'],
+              etime: events[eventKey]['Etime'],
+              location: events[eventKey]['Location'],
+              description: events[eventKey]['Description'],
+              id: eventKey,
+            };
+            eventList.push(ev);
+          }
         }
         const mainContainer = {'paddingBottom': '4%'};
         return (
-            <div className="container" style={mainContainer}>
-                {
-                    eventList.map((listedEvent) => {
-                        return <Card key={listedEvent.id} event={listedEvent}/>
-                    })
-                } 
-            </div>
+          <div className="container" style={mainContainer}>
+            {
+              eventList.map((listedEvent) => {
+                return <Card key={listedEvent.id}
+                 event={listedEvent}
+                 allUsers={this.props.userData}
+                 userID={this.props.uid}  />
+              })
+            } 
+          </div>
         );
     }
     render() {
         const { uid, userData } = this.props;
-    	if (uid) {
+        if (uid) {
     		return (
                 <div>
                     <Header loggedIn={true}/>
@@ -47,7 +50,6 @@ class Home extends Component {
                         <h2>My Events</h2>
                         {this.renderEvents()}
                     </div>
-                    
                 </div>
             );
     	}

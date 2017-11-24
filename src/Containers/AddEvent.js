@@ -10,27 +10,29 @@ import {required } from '../Helpers/ReduxFormValidation';
 import Header from '../Containers/Header';
 class AddEvent extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      error: ''
-    };
+      super(props);
+      this.state = {
+          error: ''
+      };
   }
-
   onSubmit(data) {
+    console.log(data);
+    console.log(this.props.userData[this.props.uid]);
+    console.log(typeof(this.props.events));
     let index = Object.keys(this.props.events).length;
     let events = this.props.events;
+    //TODO (awogbemila) we need to give event more meaningful IDs other than indexes;
+    // I think this can lead to serious problems in the future.
     events[index] = data;
-    this.props.addEvent(this.props.uid, events).catch((err) => {
-        this.setState({
-          error: err
-        });
-      }
+    console.log(events);
+    this.props.addEvent(events).catch((err) => {
+            this.setState({
+                error: err
+            });
+        }
     );
     this.props.history.push('/Events');
-
   }
-
-
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -95,20 +97,19 @@ class AddEvent extends Component {
           </form>
         </SimpleBox>
       </div>
-    );
-  }
+        );
+    }
 }
-
 function mapStateToProps(state, ownProps) {
-  const checkedUser = state.user || {};
-  return {
-    uid: checkedUser.uid,
-    userData: state.dbUsers,
-    events: state.events};
+    const checkedUser = state.user || {};
+    return {
+        uid: checkedUser.uid,
+        userData: state.dbUsers,
+        events: state.events};
 }
 
 let form = reduxForm({
-  form: 'AddEventForm'
+    form: 'AddEventForm'
 })(AddEvent);
 
 form = connect(mapStateToProps, {addEvent})(form);
