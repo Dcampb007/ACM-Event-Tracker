@@ -16,10 +16,13 @@ export class Card extends React.Component {
            if (snapshot.val()) {
                let updated_events = snapshot.val();
                updated_events[ev_id] = ev_id;
-               database.ref("users/" + this.props.userID + "/events").update(updated_events);
+               console.log(ev_id);
+               database.ref("users/" + this.props.userID + "/events").set(updated_events);
            } else {
-               let updated_events = {ev_id: ev_id};
-               database.ref("users/"+this.props.userID+"/events/"+ev_id).update(updated_events);
+               console.log(ev_id);
+               let updated_events = {};
+               updated_events[ev_id] = ev_id;
+               database.ref("users/"+this.props.userID+"/events/"+ev_id).set(updated_events);
            }
         });
     }

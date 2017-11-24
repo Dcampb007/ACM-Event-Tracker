@@ -11,6 +11,8 @@ class Events extends Component {
     renderEvents() {
         let events = this.props.events;
         let eventList = [];
+        //TODO (awogbemila) we need to give event more meaningful IDs other than indexes;
+        // I think this can lead to serious problems in the future.
         Object.keys(events).forEach(function (key, index) {
             let ev = {
                 title: events[key]['Title'],
@@ -37,17 +39,20 @@ class Events extends Component {
     renderAdmin() {
         return (
             <div className="text-center">
-              <h1> For Admins </h1>
-              <Link to="/AddEvent">
-                <button  type="button" className="btn btn-primary">Add Event</button>
-              </Link>
+                <h1> For Admins </h1>
+                <Link to="/AddEvent">
+                    <button  type="button" className="btn btn-primary">Add Event</button>
+                </Link>
+                <Link to="/UsersRegistration">
+                    <button  type="button" className="btn btn-primary">View Users' Registration</button>
+                </Link>`
             </div>
         )
     }
     renderUser() {
         return (
             <div>
-              <h1>For User </h1>
+                <h1>For User </h1>
             </div>
         )
     }
@@ -55,7 +60,7 @@ class Events extends Component {
         const { uid, userData } = this.props;
         return (
             <div>
-              <Header loggedIn={true} />
+                <Header loggedIn={true} />
                 {userData[uid]['isAdmin'] === true
                     ? this.renderAdmin()
                     : this.renderUser()

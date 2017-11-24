@@ -12,6 +12,7 @@ import LoadingComponent from './Containers/LoadingComponent';
 import AuthenticatedComponent from './Containers/AuthenticatedComponent';
 import ListUsers from './Containers/ListUsers';
 import Home from './Containers/Home';
+import UsersRegistrationView from './Containers/UsersRegistration';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -27,6 +28,7 @@ ReactDOM.render(
           <AuthenticatedComponent>
             <Route path="/Events" component={Events}/>
             <Route path="/AddEvent" component={AddEvent}/>
+            <Route path="/UsersRegistration" component={UsersRegistrationView}/>
           </AuthenticatedComponent>
         </Switch>
       </LoadingComponent>
