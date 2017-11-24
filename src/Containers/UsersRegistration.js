@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { database } from '../Firebase';
 import { connect } from 'react-redux';
 import Header from './Header';
 
@@ -10,7 +9,6 @@ class UsersRegistrationView extends Component {
             attendeeMap : {}
         }
     }
-
     componentWillMount() {
         const { uid, userData, events } = this.props;
         let attendeeMap = new Object();
@@ -38,14 +36,13 @@ class UsersRegistrationView extends Component {
         eventIDs.forEach((id) => {
            if (this.state.attendeeMap[id].length > 0) {
                //console.log(this.props.events[id].Title+" has "+this.state.attendeeMap[id].length+" registered members");
-               listItems.push(<ul key={"event"+id}>{this.props.events[id].Title}
+               listItems.push(<ul  className="event-list" key={"event"+id}>{this.props.events[id].Title}
                    {
                        this.state.attendeeMap[id].map((attendee) =>
                        {
-                           return<li key={"event"+id+attendee.lname }>{attendee.lname}</li>;
+                           return<li className="list-group-item list-group-item-success" key={"event"+id+attendee.lname }>{attendee.lname+" "+attendee.fname }</li>;
                        }
                        )}
-
                </ul>);
            }
         });
@@ -53,7 +50,7 @@ class UsersRegistrationView extends Component {
         return(<div>
             <Header loggedIn={true}/>
             <p>These are the events and the registered memebers.</p>
-            <ul>{listItems}</ul>
+            <div className={"container"}>{listItems}</div>
         </div>);
     }
 }

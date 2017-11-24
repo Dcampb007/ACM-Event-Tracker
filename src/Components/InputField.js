@@ -26,6 +26,27 @@ export const InputField = (props) => {
   );
 };
 
+export const EmptyInputField = (props) => {
+    const { required, input, meta: { touched, error } } = props;
+    const isError = touched && error;
+    return (
+        <div className="form-group row">
+            <label className="col-sm-3 col-form-label">{`${props.label} ${required ? '*' : ''}`}</label>
+            <div className="col-sm-9">
+                <input type={props.type}
+                       className="form-control"
+                       {...input}
+                       style={isError ? errStyle : null}
+                />
+                {isError &&
+                <div className="alert alert-danger mt-2" role="alert">
+                    {error}
+                </div>}
+            </div>
+        </div>
+    );
+};
+
 export const TextAreaField = (props) => {
   const { required, input, meta: { touched, error } } = props;
   const isError = touched && error;

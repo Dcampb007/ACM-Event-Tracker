@@ -31,7 +31,7 @@ ReactDOM.render(
                         <Route path="/Events" component={Events}/>
                         <Route path="/AddEvent" component={AddEvent}/>
                         <Route path="/UsersRegistration" component={UsersRegistrationView}/>
-                        <Route path="/TakeSurvey" component={TakeSurvey}/>
+                        <Route path="/TakeSurvey/:eventID/:eventTitle" component={TakeSurvey}/>
                     </AuthenticatedComponent>
                 </Switch>
             </LoadingComponent>

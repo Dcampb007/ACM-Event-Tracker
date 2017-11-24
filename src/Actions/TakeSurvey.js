@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import SurveyBox from '../Components/SurveyBox';
-import InputField from '../Components/InputField';
+import {EmptyInputField} from '../Components/InputField';
 import FooterFormButton from '../Components/FooterFormButton';
 import { connect } from 'react-redux';
+import { updateEventSurveys } from '../Actions/UserActions';
 import ErrorAlert from '../Components/ErrorAlert';
 import { Field, reduxForm } from 'redux-form';
 import {required } from '../Helpers/ReduxFormValidation';
@@ -14,14 +15,14 @@ class TakeSurvey extends Component {
         super(props);
         this.state = {
             error: '',
+            eventTitle: this.props.match.params.eventTitle,
+            eventID: this.props.match.params.eventID,
             timingResponse: '',
             venueResponse: ''
         };
     }
 
     onChange = (e) => {
-        // Because we named the inputs to match their corresponding values in state, it's
-        // super easy to update the state
         const state = this.state;
         state[e.target.name] = e.target.value;
         this.setState(state);
@@ -29,11 +30,12 @@ class TakeSurvey extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        // get our form data out of state
         const { timingResponse, venueResponse } = this.state;
-        console.log(this.props);
-        let s = new URLSearchParams(this.props.location.search);
-        console.log(s.get('eventID'));
+        let surveyResponse = {
+            'timingResponse': timingResponse,
+            'venueResponse': venueResponse
+            };
+        this.props.updateEventSurveys(this.state.eventID, this.props.uid, surveyResponse);
     }
 
     render() {
@@ -42,12 +44,12 @@ class TakeSurvey extends Component {
         return (
             <div>
                 <Header loggedIn={true}/>
-                <SurveyBox title="Take Survey">
+                <SurveyBox title={"Take Survey for "+this.state.eventTitle}>
                     <form onSubmit={this.onSubmit.bind(this)}>
                         <div className="card-body">
                             <Field
                                 name="timingResponse"
-                                component={InputField}
+                                component={EmptyInputField}
                                 label="How did you feel about the timing of the event?"
                                 value={timingResponse}
                                 validate={[required]}
@@ -57,7 +59,7 @@ class TakeSurvey extends Component {
                             />
                             <Field
                                 name="venueResponse"
-                                component={InputField}
+                                component={EmptyInputField}
                                 label="How convenient was the venue?"
                                 value={venueResponse}
                                 validate={[required]}
@@ -89,6 +91,6 @@ let form = reduxForm({
     form: 'TakeSurveyForm'
 })(TakeSurvey);
 
-form = connect(mapStateToProps, {})(form);
+form = connect(mapStateToProps, { updateEventSurveys })(form);
 
 export default form;

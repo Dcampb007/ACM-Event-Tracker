@@ -2,6 +2,8 @@ import React from 'react';
 import { database } from '../Firebase';
 import { connect } from 'react-redux';
 import { updateUserEvents } from '../Actions/UserActions';
+import {Link} from 'react-router-dom';
+
 class Card extends React.Component {
     toggleRegistration() {
       let ev_id = this.props.event.id;
@@ -39,6 +41,7 @@ class Card extends React.Component {
             }
             return align;
         }
+
         return (
             <div className="row" style={divClass}>
                 <div className="col-md-8 offset-md-2 card card-inverse" style={cardBackground}>
@@ -54,14 +57,17 @@ class Card extends React.Component {
                             <a style={buildAlignCSS('right')}> {this.props.event.date}</a>
                         </p>
                         <br />
-                        <button disabled={(this.isRegistered(this.props.event.id))}
+                        <button className="btn btn-primary" disabled={(this.isRegistered(this.props.event.id))}
                                 onClick={this.toggleRegistration.bind(this)}>
                             Register
                         </button>
-                        <button disabled={!(this.isRegistered(this.props.event.id))}
+                        <button className="btn btn-primary" disabled={!(this.isRegistered(this.props.event.id))}
                                 onClick={this.toggleRegistration.bind(this)}>
                             Un-register
                         </button>
+                        <Link to={"/TakeSurvey/"+this.props.event.id+"/"+this.props.event.title}>
+                            <button  style={buildAlignCSS('right')}type="button" className="btn btn-primary">Take the survey for this event</button>
+                        </Link>
                         <p className="card-text"> {this.props.event.description}</p>
                     </div>
                 </div>
