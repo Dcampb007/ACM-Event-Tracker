@@ -14,6 +14,7 @@ import ListUsers from './Containers/ListUsers';
 import Home from './Containers/Home';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
+import SurveyForm from './Containers/Survey';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
@@ -27,6 +28,7 @@ ReactDOM.render(
           <AuthenticatedComponent>
             <Route path="/Events" component={Events}/>
             <Route path="/AddEvent" component={AddEvent}/>
+            <Route path="/Survey" component={SurveyForm}/>
           </AuthenticatedComponent>
         </Switch>
       </LoadingComponent>

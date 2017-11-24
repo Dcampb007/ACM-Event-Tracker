@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InputField from '../Components/InputField';
+import {InputField} from '../Components/InputField';
 import FooterFormButton from '../Components/FooterFormButton';
 import SimpleBox from '../Components/SimpleBox';
 import { createAccount } from '../Actions/UserActions';

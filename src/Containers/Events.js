@@ -16,6 +16,8 @@ renderEvents() {
     let ev = {
       title: events[key]['Title'], 
       date: events[key]['Date'],
+      stime: events[key]['Stime'],
+      etime: events[key]['Etime'],
       location: events[key]['Location'],
       description: events[key]['Description'],
       id: index,
@@ -44,7 +46,7 @@ renderEvents() {
   }
   renderUser() {
     return (
-      <div>
+      <div className="text-center">
         <h1>For User </h1>
       </div>
       )

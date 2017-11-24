@@ -16,6 +16,8 @@ class Home extends Component {
                 let ev = {
                     title: events[eventKey]['Title'], 
                     date: events[eventKey]['Date'],
+                    stime: events[eventKey]['Stime'],
+                    etime: events[eventKey]['Etime'],
                     location: events[eventKey]['Location'],
                     description: events[eventKey]['Description'],
                     id: eventKey,

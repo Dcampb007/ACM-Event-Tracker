@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SimpleBox from '../Components/SimpleBox';
-import InputField from '../Components/InputField';
+import {InputField, TextAreaField} from '../Components/InputField';
 import FooterFormButton from '../Components/FooterFormButton';
 import { addEvent} from '../Actions/UserActions';
 import { connect } from 'react-redux';
@@ -17,13 +17,9 @@ class AddEvent extends Component {
   }
 
   onSubmit(data) {
-    console.log(data);
-    console.log(this.props.userData[this.props.uid]);
-    console.log(typeof(this.props.events));
     let index = Object.keys(this.props.events).length;
     let events = this.props.events;
     events[index] = data;
-    console.log(events);
     this.props.addEvent(this.props.uid, events).catch((err) => {
         this.setState({
           error: err
@@ -60,16 +56,32 @@ class AddEvent extends Component {
                 type="date"
               />
               <Field
+                name="Stime"
+                component={InputField}
+                label="Start Time"
+                validate={required}
+                required={true}
+                type="time"
+              />
+              <Field
+                name="Etime"
+                component={InputField}
+                label="End Time"
+                validate={required}
+                required={true}
+                type="time"
+              />
+              <Field
                 name="Location"
                 component={InputField}
                 label="Location"
-                validate={[required]}
+                validate={required}
                 required={true}
                 type="location"
               />
               <Field
                 name="Description"
-                component={InputField}
+                component={TextAreaField}
                 label="Description"
                 validate={required}
                 required={true}
