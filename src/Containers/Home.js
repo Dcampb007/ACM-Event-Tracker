@@ -39,7 +39,7 @@ class Home extends Component {
     }
     render() {
         const { uid, userData } = this.props;
-    	if (uid) {
+        if (uid) {
     		return (
                 <div>
                     <Header loggedIn={true}/>
@@ -48,7 +48,6 @@ class Home extends Component {
                         <h2>My Events</h2>
                         {this.renderEvents()}
                     </div>
-                    
                 </div>
             );
     	}

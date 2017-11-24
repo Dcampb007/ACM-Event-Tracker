@@ -15,7 +15,6 @@ export class Card extends React.Component {
         let events = database.ref("users/"+this.props.userID+"/events").once('value').then((snapshot) => {
             let updated_events = snapshot.val();
             updated_events[ev_id] = ev_id;
-            console.log(typeof(updated_events));
             database.ref("users/"+this.props.userID+"/events").update(updated_events);
         });
     }
