@@ -29,46 +29,50 @@ class Home extends Component {
         return (
             <div className="container" style={mainContainer}>
                 {
-                    eventList.map((listedEvent) => {
-                        return <Card key={listedEvent.id}
-                                     event={listedEvent}
-                                     allUsers={this.props.userData}
-                                     userID={this.props.uid}  />
-                    })
+                    eventList.length === 0
+                        ?
+                        <h1>You are not registered for any events :(</h1>
+                        :
+                        eventList.map((listedEvent) => {
+                            return <Card key={listedEvent.id}
+                                         event={listedEvent}
+                                         allUsers={this.props.userData}
+                                         userID={this.props.uid}  />
+                        })
                 }
             </div>
-                );
-                }
-                render() {
-                             const { uid, userData } = this.props;
-                             if (uid) {
-                             return (
-                             <div>
-                             <Header loggedIn={true}/>
-                             <div className="text-center">
-                             <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
-                             <h2>My Events</h2>
-                             {this.renderEvents()}
-                             </div>
-                             </div>
-                             );
-                         }
-                             else {
-                             return (
-                             <div>
-                             <Header loggedIn={false}/>
-                             <h1 className="text-center">Welcome to the ACM Event Tracker</h1>
-                             </div>
-                             );
-                         }
-                         }
-                }
-                function mapStateToProps(state) {
-                             const checkedUser = state.user || {};
-                             return {
-                             uid: checkedUser.uid,
-                             userData: state.dbUsers,
-                             events: state.events };
-                         }
-                export default connect(mapStateToProps, {logout, getUser})(Home);
+        );
+    }
+    render() {
+        const { uid, userData } = this.props;
+        if (uid) {
+            return (
+                <div>
+                    <Header loggedIn={true}/>
+                    <div className="text-center">
+                        <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
+                        <h2>My Events</h2>
+                        {this.renderEvents()}
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>
+                    <Header loggedIn={false}/>
+                    <h1 className="text-center">Welcome to the ACM Event Tracker</h1>
+                </div>
+            );
+        }
+    }
+}
+function mapStateToProps(state) {
+    const checkedUser = state.user || {};
+    return {
+        uid: checkedUser.uid,
+        userData: state.dbUsers,
+        events: state.events };
+}
+export default connect(mapStateToProps, {logout, getUser})(Home);
 
