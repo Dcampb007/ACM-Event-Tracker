@@ -36,6 +36,7 @@ class TakeSurvey extends Component {
             'venueResponse': venueResponse
             };
         this.props.updateEventSurveys(this.state.eventID, this.props.uid, surveyResponse);
+        this.props.history.push('/Events');
     }
 
     render() {

@@ -6,26 +6,26 @@ import {Link} from 'react-router-dom';
 
 class Card extends React.Component {
     toggleRegistration() {
-      let ev_id = this.props.event.id;
-      let user_events = this.props.userData[this.props.uid]['events'] || {};
-      if (ev_id in user_events) {
-        delete user_events[ev_id];
-        this.props.updateUserEvents(this.props.uid, user_events);
-      }
-      else {
-        user_events[ev_id] = ev_id;
-        this.props.updateUserEvents(this.props.uid, user_events);
-      }
+        let ev_id = this.props.event.id;
+        let user_events = this.props.userData[this.props.uid]['events'] || {};
+        if (ev_id in user_events) {
+            delete user_events[ev_id];
+            this.props.updateUserEvents(this.props.uid, user_events);
+        }
+        else {
+            user_events[ev_id] = ev_id;
+            this.props.updateUserEvents(this.props.uid, user_events);
+        }
     }
     isRegistered(event_id) {
-      let user_events = this.props.userData[this.props.uid]['events'] || {};
-      return event_id in user_events;
+        let user_events = this.props.userData[this.props.uid]['events'] || {};
+        return event_id in user_events;
     }
     render() {
         const divClass = {
             'paddingTop': '4%',
         }
-        
+
         const cardBackground = {
             'backgroundColor': '#868e96',
             'borderColor': '#868e96',
@@ -49,7 +49,7 @@ class Card extends React.Component {
                         <h4 className="card-title"> {this.props.event.title}</h4>
                     </div>
                     <div className="card-body body-text" style={body_text_style}>
-                        <p className='card-text'> 
+                        <p className='card-text'>
                             <a style={buildAlignCSS('left')}> {this.props.event.location}  </a>
                             <br/>
                             <a style={buildAlignCSS('left')}>From: {this.props.event.stime} -  To: {this.props.event.etime}</a>
@@ -68,6 +68,17 @@ class Card extends React.Component {
                         <Link to={"/TakeSurvey/"+this.props.event.id+"/"+this.props.event.title}>
                             <button  style={buildAlignCSS('right')}type="button" className="btn btn-primary">Take the survey for this event</button>
                         </Link>
+                        {this.props.userData[this.props.uid]['isAdmin']
+                            ?
+                            <Link to={"/ViewSurveyResponses/"+this.props.event.id+"/"+this.props.event.title}>
+                                <button style={buildAlignCSS('right')} type="button" className="btn btn-primary">
+                                    View the survey responses to this event.
+                                </button>
+                            </Link>
+                            :
+                            <span></span>
+                        }
+
                         <p className="card-text"> {this.props.event.description}</p>
                     </div>
                 </div>
