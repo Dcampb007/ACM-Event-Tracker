@@ -13,10 +13,9 @@ import AuthenticatedComponent from './Containers/AuthenticatedComponent';
 import ListUsers from './Containers/ListUsers';
 import Home from './Containers/Home';
 import UsersRegistrationView from './Containers/UsersRegistration';
-import TakeSurvey from './Actions/TakeSurvey';
+import TakeSurvey from './Containers/TakeSurvey';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
-import SurveyForm from './Containers/Survey';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(

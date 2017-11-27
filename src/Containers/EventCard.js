@@ -21,6 +21,9 @@ class Card extends React.Component {
       let user_events = this.props.userData[this.props.uid]['events'] || {};
       return event_id in user_events;
     }
+    // enableSurvey() {
+    //   return 
+    // }
     render() {
         const divClass = {
             'paddingTop': '4%',

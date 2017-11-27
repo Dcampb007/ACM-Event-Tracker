@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SurveyBox from '../Components/SurveyBox';
+import SimpleBox from '../Components/SurveyBox';
 import {EmptyInputField} from '../Components/InputField';
 import FooterFormButton from '../Components/FooterFormButton';
 import { connect } from 'react-redux';
@@ -44,7 +44,7 @@ class TakeSurvey extends Component {
         return (
             <div>
                 <Header loggedIn={true}/>
-                <SurveyBox title={"Take Survey for "+this.state.eventTitle}>
+                <SimpleBox title={"Take Survey for "+this.state.eventTitle}>
                     <form onSubmit={this.onSubmit.bind(this)}>
                         <div className="card-body">
                             <Field
@@ -73,7 +73,7 @@ class TakeSurvey extends Component {
                             />
                         </div>
                     </form>
-                </SurveyBox>
+                </SimpleBox>
             </div>
         );
     }
