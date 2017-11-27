@@ -19,10 +19,7 @@ class UsersRegistrationView extends Component {
                 user = userData[user];
                 if (user.events) {
                     if (currentEventID in user.events) {
-                        //console.log(user.lname+" is going to "+events[currentEventID].Title)
-                        //console.log( attendeeMap[currentEventID]);
                         attendeeMap[currentEventID] =  attendeeMap[currentEventID].concat([user]);
-                        //console.log(attendeeMap[currentEventID]);
                     }
                 }
             }
@@ -35,7 +32,6 @@ class UsersRegistrationView extends Component {
         let listItems = [];
         eventIDs.forEach((id) => {
            if (this.state.attendeeMap[id].length > 0) {
-               //console.log(this.props.events[id].Title+" has "+this.state.attendeeMap[id].length+" registered members");
                listItems.push(<ul  className="event-list" key={"event"+id}>{this.props.events[id].Title}
                    {
                        this.state.attendeeMap[id].map((attendee) =>

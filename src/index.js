@@ -10,10 +10,10 @@ import Login from './Containers/Login';
 import CreateAccount from './Containers/CreateAccount';
 import LoadingComponent from './Containers/LoadingComponent';
 import AuthenticatedComponent from './Containers/AuthenticatedComponent';
-import ListUsers from './Containers/ListUsers';
 import Home from './Containers/Home';
 import UsersRegistrationView from './Containers/UsersRegistration';
 import TakeSurvey from './Containers/TakeSurvey';
+import ViewSurveyResponses from './Actions/ViewSurveyResponses';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -31,6 +31,7 @@ ReactDOM.render(
                         <Route path="/AddEvent" component={AddEvent}/>
                         <Route path="/UsersRegistration" component={UsersRegistrationView}/>
                         <Route path="/TakeSurvey/:eventID/:eventTitle" component={TakeSurvey}/>
+                        <Route path="/ViewSurveyResponses/:eventID/:eventTitle" component={ViewSurveyResponses}/>
                     </AuthenticatedComponent>
                 </Switch>
             </LoadingComponent>

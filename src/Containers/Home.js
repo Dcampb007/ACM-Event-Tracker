@@ -44,14 +44,14 @@ class Home extends Component {
       const { uid, userData } = this.props;
       if (uid) {
         return (
-        <div>
-        <Header loggedIn={true}/>
-        <div className="text-center">
-        <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
-        <h2>My Events</h2>
-        {this.renderEvents()}
-        </div>
-        </div>
+          <div>
+            <Header loggedIn={true}/>
+            <div className="text-center">
+              <h1>Welcome {userData[uid].fname} {userData[uid].lname}</h1>
+              <h2>My Events</h2>
+              {this.renderEvents()}
+            </div>
+          </div>
         );
       }
       else {
@@ -76,4 +76,3 @@ class Home extends Component {
     events: state.events };
   }
   export default connect(mapStateToProps, {logout, getUser})(Home);
-

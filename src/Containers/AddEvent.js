@@ -16,15 +16,11 @@ class AddEvent extends Component {
       };
   }
   onSubmit(data) {
-    console.log(data);
-    console.log(this.props.userData[this.props.uid]);
-    console.log(typeof(this.props.events));
     let index = Object.keys(this.props.events).length;
     let events = this.props.events;
     //TODO (awogbemila) we need to give event more meaningful IDs other than indexes;
     // I think this can lead to serious problems in the future.
     events[index] = data;
-    console.log(events);
     this.props.addEvent(events).catch((err) => {
             this.setState({
                 error: err
