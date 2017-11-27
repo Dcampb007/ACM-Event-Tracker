@@ -6,7 +6,6 @@ import { database } from '../Firebase';
 class ViewSurveyResponses extends Component{
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             eventTitle: this.props.match.params.eventTitle,
             eventID: this.props.match.params.eventID,
@@ -15,7 +14,9 @@ class ViewSurveyResponses extends Component{
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        console.log("component will mount called");
+
         let surveys = database.ref('surveys/events/'+this.state.eventID+"/users").on('value', (snapshot) => {
             snapshot.forEach((user) => {
                 const userResponses = user.val();
@@ -26,14 +27,20 @@ class ViewSurveyResponses extends Component{
     }
 
     render() {
+        //////////////////////////////////////////////////////////////////////
+        //temporary workaround for firebase data not being loaded before renderinf occur
+        var t = setTimeout(function() { //Start the timer
+            this.setState({render: true}) //After 1 second, set render to true
+        }.bind(this), 1000);
+        //////////////////////////////////////////////////////////////////////
         let timingResponsesList = [];
         let venueResponsesList = [];
         this.state.timingResponses.forEach((timingResponse, index) => {
-            timingResponsesList.push(<li className="list-gorup-item" key={timingResponse+index}>
+            timingResponsesList.push(<li className="list-group-item" key={timingResponse+index}>
                 { timingResponse }</li>);
         });
         this.state.venueResponses.forEach((venueResponse, index) => {
-            venueResponsesList.push(<li className="list-gorup-item" key={venueResponse+index}>
+            venueResponsesList.push(<li className="list-group-item" key={venueResponse+index}>
                 { venueResponse }</li>);
         });
         return (<div>
@@ -41,9 +48,9 @@ class ViewSurveyResponses extends Component{
             <div className="container">
                 <h1>SurveyResponses for {this.state.eventTitle}</h1>
                 <h2>Timing Responses</h2>
-                <ul>{ timingResponsesList }</ul>
+                <ul className="list-group">{ timingResponsesList }</ul>
                 <h2>Venue Responses</h2>
-                <ul>{ venueResponsesList }</ul>
+                <ul className="list-group">{ venueResponsesList }</ul>
             </div>
         </div>);
     }
