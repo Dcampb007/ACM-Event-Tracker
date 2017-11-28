@@ -5,6 +5,7 @@ import SimpleBox from '../Components/SimpleBox';
 import { connect } from 'react-redux';
 import { logout, getUser } from '../Actions/UserActions';
 import Card from './EventCard';
+import {Link} from 'react-router-dom';
 import '../Styles/App.css';
 
 class Home extends Component {
@@ -61,7 +62,7 @@ class Home extends Component {
             <div className="jumbotron">
               <h1 className="display-3">ACM Event Tracker</h1>
               <p>Welcome to the Howard University ACM Event Tracker.</p>
-              <p><a className="btn btn-primary btn-lg" href="#">About The Site</a></p>
+              <p><Link className="btn btn-primary btn-lg" to="/AboutThisSite">About The Site</Link></p>
             </div>
           </div>
         );

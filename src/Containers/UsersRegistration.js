@@ -36,7 +36,7 @@ class UsersRegistrationView extends Component {
                    {
                        this.state.attendeeMap[id].map((attendee) =>
                        {
-                           return<li className="list-group-item list-group-item-success" key={"event"+id+attendee.lname }>{attendee.lname+" "+attendee.fname }</li>;
+                           return<li className="list-group-item list-group-item-info" key={"event"+id+attendee.lname }>{attendee.lname+" "+attendee.fname }</li>;
                        }
                        )}
                </ul>);

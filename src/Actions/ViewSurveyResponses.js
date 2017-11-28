@@ -16,8 +16,6 @@ class ViewSurveyResponses extends Component{
 
 
     componentWillMount() {
-        console.log("component will mount called");
-
         let surveys = database.ref('surveys/events/'+this.state.eventID+"/users").on('value', (snapshot) => {
             let tResponses = this.state.timingResponses;
             let vResponses = this.state.venueResponses;
@@ -37,11 +35,11 @@ class ViewSurveyResponses extends Component{
         let timingResponsesList = [];
         let venueResponsesList = [];
         this.state.timingResponses.forEach((timingResponse, index) => {
-            timingResponsesList.push(<li className="list-group-item" key={timingResponse+index}>
+            timingResponsesList.push(<li className="list-group-item list-group-item-success" key={timingResponse+index}>
                 { timingResponse }</li>);
         });
         this.state.venueResponses.forEach((venueResponse, index) => {
-            venueResponsesList.push(<li className="list-group-item" key={ venueResponse+index }>
+            venueResponsesList.push(<li className="list-group-item list-group-item-success" key={ venueResponse+index }>
                 { venueResponse }</li>);
         });
         return (<div>

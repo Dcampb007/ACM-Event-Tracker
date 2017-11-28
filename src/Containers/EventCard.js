@@ -45,11 +45,28 @@ class Card extends React.Component {
             return align;
         }
 
+        function smallImageStyle() {
+            const smallSize = {
+                'width': '100px',
+                'height': '100px',
+                'float': 'left',
+                'display':'inline'
+            }
+            return smallSize;
+        }
+        function CardTitleStyle() {
+            //<img style={smallImageStyle()} src={require("../Images/green-check-mark.svg")}/>
+            const cardTitleStyle = {
+                'float': 'left',
+                'display':'inline'
+            }
+            return cardTitleStyle;
+        }
         return (
             <div className="row" style={divClass}>
                 <div className="col-md-8 offset-md-2 card card-inverse" style={cardBackground}>
                     <div className="card-header text-center">
-                        <h4 className="card-title"> {this.props.event.title}</h4>
+                        <h4 className="card-title" style={CardTitleStyle()}> {this.props.event.title}</h4>
                     </div>
                     <div className="card-body body-text" style={body_text_style}>
                         <p className='card-text'>
@@ -81,7 +98,6 @@ class Card extends React.Component {
                             :
                             <span></span>
                         }
-
                         <p className="card-text"> {this.props.event.description}</p>
                     </div>
                 </div>
