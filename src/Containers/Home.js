@@ -64,6 +64,8 @@ class Home extends Component {
               <p>Welcome to the Howard University ACM Event Tracker.</p>
               <p><Link className="btn btn-primary btn-lg" to="/AboutThisSite">About The Site</Link></p>
             </div>
+            <a href="https://www.howard.edu" target={"_blank"}><img src={require("../Images/hu_circle.png")}/></a>
+            <a href="https://www.acm.org/about-acm/about-the-acm-organization" target="_blank"><img src={require("../Images/acm_circular_crop.png")}/></a>
           </div>
         );
       }
