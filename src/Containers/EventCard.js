@@ -58,6 +58,7 @@ class Card extends React.Component {
             const cardTitleStyle = {
                 'float': 'left',
                 'display':'inline',
+                'font-weight': 'bold'
             }
             return cardTitleStyle;
         }
