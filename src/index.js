@@ -17,7 +17,6 @@ import ViewSurveyResponses from './Actions/ViewSurveyResponses';
 import Events from './Containers/Events';
 import AddEvent from './Containers/AddEvent';
 import AboutACM from './Containers/About';
-import AboutThisSite from './Containers/AboutThisSite';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
@@ -27,7 +26,6 @@ ReactDOM.render(
                 <Switch>
                     <Route path="/CreateAccount" component={CreateAccount}/>
                     <Route path="/About" component={AboutACM}/>
-                    <Route path="/AboutThisSite" component={AboutThisSite}/>
                     <Route path="/Login" component={Login}/>
                     <Route exact path="/" component={Home}/>
                     <AuthenticatedComponent>
