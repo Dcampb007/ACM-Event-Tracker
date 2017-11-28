@@ -14,25 +14,26 @@ class ViewSurveyResponses extends Component{
         }
     }
 
-    componentDidMount() {
+
+    componentWillMount() {
         console.log("component will mount called");
 
         let surveys = database.ref('surveys/events/'+this.state.eventID+"/users").on('value', (snapshot) => {
+            let tResponses = this.state.timingResponses;
+            let vResponses = this.state.venueResponses;
             snapshot.forEach((user) => {
                 const userResponses = user.val();
-                this.state.timingResponses = this.state.timingResponses.concat([userResponses.surveyResponse.timingResponse]);
-                this.state.venueResponses = this.state.venueResponses.concat([userResponses.surveyResponse.venueResponse]);
+                tResponses = tResponses.concat([userResponses.surveyResponse.timingResponse]);
+                vResponses = vResponses.concat([userResponses.surveyResponse.venueResponse]);
+            });
+            this.setState({
+                timingResponses: tResponses,
+                venueResponses: vResponses
             });
         });
     }
 
     render() {
-        //////////////////////////////////////////////////////////////////////
-        //temporary workaround for firebase data not being loaded before renderinf occur
-        var t = setTimeout(function() { //Start the timer
-            this.setState({render: true}) //After 1 second, set render to true
-        }.bind(this), 1000);
-        //////////////////////////////////////////////////////////////////////
         let timingResponsesList = [];
         let venueResponsesList = [];
         this.state.timingResponses.forEach((timingResponse, index) => {
@@ -40,7 +41,7 @@ class ViewSurveyResponses extends Component{
                 { timingResponse }</li>);
         });
         this.state.venueResponses.forEach((venueResponse, index) => {
-            venueResponsesList.push(<li className="list-group-item" key={venueResponse+index}>
+            venueResponsesList.push(<li className="list-group-item" key={ venueResponse+index }>
                 { venueResponse }</li>);
         });
         return (<div>
